@@ -1,0 +1,427 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#08111f">
+  <title>GreenPulse | Energy Intelligence</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="#overview">
+      <span class="brand-icon">⚡</span>
+      <span>
+        <strong>greenpulse</strong>
+        <small>ENERGY INTELLIGENCE</small>
+      </span>
+    </a>
+
+    <p class="nav-heading">WORKSPACE</p>
+    <nav id="navigation">
+      <a href="#overview" class="nav-link active">▦ &nbsp; Overview</a>
+      <a href="#generation" class="nav-link">⌁ &nbsp; Generation</a>
+      <a href="#insights" class="nav-link">✧ &nbsp; Insights</a>
+      <a href="#plants" class="nav-link">▤ &nbsp; Plant Performance</a>
+      <a href="#dsm" class="nav-link">₹ &nbsp; DSM Calculator</a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="demo-box">
+        <span class="demo-dot"></span>
+        <div>
+          <strong>Demo environment</strong>
+          <small>Simulated generation data</small>
+        </div>
+      </div>
+      <p>GREENPULSE ANALYTICS · 2026</p>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <header class="topbar">
+      <button id="menuBtn" class="menu-btn" aria-label="Toggle menu">☰</button>
+      <div class="breadcrumb">Workspace <span>/</span> Overview</div>
+      <div class="top-actions">
+        <span class="demo-badge">● SIMULATED DATA</span>
+        <span class="avatar">EP</span>
+      </div>
+    </header>
+
+    <section id="overview" class="heading">
+      <div>
+        <p class="eyebrow">RENEWABLE OPERATIONS / PERFORMANCE</p>
+        <h1>Energy Performance <em>Overview</em></h1>
+        <p class="subtitle">
+          Renewable energy forecasting, generation monitoring and deviation intelligence.
+        </p>
+      </div>
+      <div class="report-date">
+        <small>REPORTING DATE</small>
+        <strong id="reportDate"></strong>
+        <span>Illustrative operating day</span>
+      </div>
+    </section>
+
+    <!-- DASHBOARD FILTERS -->
+    <section class="filter-panel">
+      <strong class="filter-title">☷ Dashboard Filters</strong>
+
+      <label>
+        <span>ENERGY SOURCE</span>
+        <select id="sourceFilter">
+          <option value="All">All Sources</option>
+          <option value="Wind">Wind</option>
+          <option value="Solar">Solar</option>
+        </select>
+      </label>
+
+      <label>
+        <span>POWER PLANT</span>
+        <select id="plantFilter">
+          <option value="All">All Plants</option>
+          <option value="Wind Farm A">Wind Farm A</option>
+          <option value="Wind Farm B">Wind Farm B</option>
+          <option value="Solar Park A">Solar Park A</option>
+          <option value="Solar Park B">Solar Park B</option>
+        </select>
+      </label>
+
+      <label>
+        <span>TIME WINDOW</span>
+        <select id="timeFilter">
+          <option value="all">All Demo Intervals</option>
+          <option value="daylight">08:00 – 16:00</option>
+        </select>
+      </label>
+
+      <button class="reset-btn" id="resetBtn">Reset ↺</button>
+    </section>
+
+    <!-- KPI CARDS -->
+    <section class="kpi-grid">
+
+      <article class="kpi featured">
+        <div class="kpi-top">
+          <span>ACTUAL GENERATION</span>
+          <b class="green">↗</b>
+        </div>
+        <h2 id="actualKpi">—</h2>
+        <p><i class="dot green-bg"></i> Average actual power</p>
+      </article>
+
+      <article class="kpi">
+        <div class="kpi-top">
+          <span>FORECAST GENERATION</span>
+          <b class="blue">⌁</b>
+        </div>
+        <h2 id="forecastKpi">—</h2>
+        <p><i class="dot blue-bg"></i> Average forecast power</p>
+      </article>
+
+      <article class="kpi">
+        <div class="kpi-top">
+          <span>FORECAST INDICATOR</span>
+          <b class="purple">◎</b>
+        </div>
+        <h2 id="accuracyKpi">—</h2>
+        <p><i class="dot purple-bg"></i> 100% minus WAPE</p>
+      </article>
+
+      <article class="kpi">
+        <div class="kpi-top">
+          <span>NET DEVIATION</span>
+          <b class="orange">⌁</b>
+        </div>
+        <h2 id="deviationKpi">—</h2>
+        <p><i class="dot orange-bg"></i> Actual minus forecast</p>
+      </article>
+
+    </section>
+
+    <!-- GENERATION CHARTS -->
+    <section id="generation" class="chart-grid">
+
+      <article class="panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">GENERATION TREND</p>
+            <h3>Actual vs Forecast</h3>
+            <p>Power profile by sample interval · MW</p>
+          </div>
+          <div class="legend">
+            <span><i class="dot green-bg"></i> Actual</span>
+            <span><i class="dot blue-bg"></i> Forecast</span>
+          </div>
+        </div>
+
+        <div class="chart-container">
+          <canvas id="generationChart"></canvas>
+        </div>
+
+        <p class="panel-foot">
+          Illustrative values, not real-time plant readings
+        </p>
+      </article>
+
+      <article class="panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">PORTFOLIO BREAKDOWN</p>
+            <h3>Generation Mix</h3>
+            <p>Average actual power by source</p>
+          </div>
+        </div>
+
+        <div class="donut-container">
+          <canvas id="mixChart"></canvas>
+          <div class="donut-center">
+            <strong id="mixTotal">—</strong>
+            <small>AVG MW</small>
+          </div>
+        </div>
+
+        <div class="mix-row">
+          <span>🟢 Wind</span>
+          <b id="windMix">—</b>
+          <span id="windPct">—</span>
+        </div>
+
+        <div class="mix-row">
+          <span>🔵 Solar</span>
+          <b id="solarMix">—</b>
+          <span id="solarPct">—</span>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- ANALYTICS -->
+    <section id="insights" class="chart-grid insights-grid">
+
+      <article class="panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">FORECAST QUALITY</p>
+            <h3>Deviation Analysis</h3>
+            <p>Absolute error by sample interval · MW</p>
+          </div>
+        </div>
+
+        <div class="error-container">
+          <canvas id="errorChart"></canvas>
+        </div>
+
+        <div class="metrics-row">
+          <div>
+            <small>Mean Absolute Error</small>
+            <strong id="maeValue">—</strong>
+          </div>
+          <div>
+            <small>WAPE</small>
+            <strong id="wapeValue">—</strong>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel">
+        <p class="eyebrow">OPERATIONS SNAPSHOT</p>
+        <h3>Performance Notes</h3>
+
+        <div class="insight-box">
+          <strong id="insightTitle">Analyzing generation</strong>
+          <p id="insightText">Loading...</p>
+        </div>
+
+        <div class="ml-box">
+          <span>✦ FUTURE DEVELOPMENT · PLANNED</span>
+          <h4>Python ML Forecasting</h4>
+          <p>
+            Future integration of weather data, historical generation
+            and machine learning models for renewable energy prediction.
+          </p>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- PLANT PERFORMANCE -->
+    <section id="plants" class="panel section-panel">
+
+      <div class="panel-head">
+        <div>
+          <p class="eyebrow">ASSET PERFORMANCE</p>
+          <h3>Plant-Wise Generation</h3>
+          <p>Average MW for the selected sample intervals</p>
+        </div>
+
+        <button class="export-btn" id="exportBtn">
+          ↓ Export CSV
+        </button>
+      </div>
+
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>POWER PLANT</th>
+              <th>SOURCE</th>
+              <th>FORECAST MW</th>
+              <th>ACTUAL MW</th>
+              <th>DEVIATION MW</th>
+              <th>FORECAST INDICATOR</th>
+            </tr>
+          </thead>
+          <tbody id="plantTable"></tbody>
+        </table>
+      </div>
+
+    </section>
+
+    <!-- DSM CALCULATOR -->
+    <section id="dsm" class="panel section-panel">
+
+      <div class="panel-head">
+        <div>
+          <p class="eyebrow">SETTLEMENT ANALYTICS</p>
+          <h3>DSM Deviation Calculator</h3>
+          <p>Estimate deviation energy and indicative financial exposure.</p>
+        </div>
+        <span class="demo-badge">DEMO ESTIMATE</span>
+      </div>
+
+      <div class="dsm-grid">
+
+        <div class="dsm-form">
+
+          <label>
+            Scheduled Generation (MW)
+            <input id="dsmSchedule" type="number"
+              min="0" step="0.01" value="100">
+          </label>
+
+          <label>
+            Actual Generation (MW)
+            <input id="dsmActual" type="number"
+              min="0" step="0.01" value="92">
+          </label>
+
+          <label>
+            Settlement Interval
+            <select id="dsmInterval">
+              <option value="15">15 Minutes</option>
+              <option value="30">30 Minutes</option>
+              <option value="60">60 Minutes</option>
+            </select>
+          </label>
+
+          <label>
+            Assumed Rate (₹/MWh)
+            <input id="dsmRate" type="number"
+              min="0" step="1" value="5000">
+          </label>
+
+          <label>
+            Grid Frequency (Hz) · Reference only
+            <input id="dsmFrequency" type="number"
+              min="45" max="55" step="0.01" value="50">
+          </label>
+
+          <button id="calculateDsm" class="calculate-btn">
+            Calculate Deviation →
+          </button>
+
+        </div>
+
+        <div class="dsm-results">
+
+          <div class="result-heading">
+            <span>CALCULATION OUTPUT</span>
+            <b id="dsmStatus">UNDER-INJECTION</b>
+          </div>
+
+          <div class="result-total">
+            <small>Indicative Deviation Value</small>
+            <h2 id="dsmAmount">—</h2>
+            <p>Absolute deviation energy × assumed rate</p>
+          </div>
+
+          <div class="result-grid">
+            <div>
+              <small>Deviation</small>
+              <strong id="dsmDeviation">—</strong>
+            </div>
+
+            <div>
+              <small>Deviation Energy</small>
+              <strong id="dsmEnergy">—</strong>
+            </div>
+
+            <div>
+              <small>Deviation Percentage</small>
+              <strong id="dsmPercent">—</strong>
+            </div>
+
+            <div>
+              <small>Grid Frequency</small>
+              <strong id="dsmFreq">—</strong>
+            </div>
+          </div>
+
+          <div class="formula">
+            <strong>Calculation Method</strong>
+            <p>Deviation MW = Actual − Schedule</p>
+            <p>Deviation MWh = Deviation MW × Interval Hours</p>
+            <p>Indicative Value = |Deviation MWh| × Assumed Rate</p>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="disclaimer">
+        <strong>Important:</strong>
+        This is a simplified educational DSM estimator, not an official
+        settlement calculator. Actual charges or credits depend on
+        applicable regulations, generator category, contractual schedule,
+        deviation limits and settlement rates. Grid frequency is displayed
+        for reference and does not affect this demo calculation.
+      </div>
+
+    </section>
+
+    <!-- UPDATED FOOTER -->
+    <footer class="main-footer">
+
+      <div class="footer-brand">
+        GREENPULSE · ENERGY INTELLIGENCE
+      </div>
+
+      <div class="footer-credit">
+        Designed &amp; Developed with ❤️ by
+        <strong>Samya Sarkar </strong>
+      </div>
+
+      <div class="footer-version">
+        Frontend Prototype · v2.1 · 2026
+      </div>
+
+    </footer>
+
+  </main>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+</body>
+</html>

@@ -6,7 +6,8 @@ GreenPulse is a frontend-based renewable energy analytics dashboard designed to 
 
 ## 🚀 Live Demo
 
-[View GreenPulse Dashboard](https://greenpulse-renewable-energy-dashboard.netlify.app/)
+
+greenpulseavsf.netlify.app
 
 *Replace this URL with your actual Netlify deployment link after publishing.*
 

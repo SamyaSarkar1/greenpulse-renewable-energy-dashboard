@@ -1,81 +1,217 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#08111f">
-  <title>GreenPulse | Energy Intelligence</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#030b16">
+  <title>Greenpulse.AI | Energy Management System (EMS)</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
+
 <body>
 <div class="app">
 
-  <aside class="sidebar" id="sidebar">
-    <a class="brand" href="#overview">
-      <span class="brand-icon">⚡</span>
-      <span>
-        <strong>greenpulse</strong>
-        <small>ENERGY INTELLIGENCE</small>
+  <!-- TOP NAVIGATION -->
+  <header class="navbar">
+    <a class="brand" href="#overview" aria-label="GreenPulse AI home">
+      <span class="brand-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" focusable="false">
+          <path d="M20.8 3.2C12.6 3.4 6.1 5.1 4 10.2c-1.2 2.9.2 5.7 2.9 6.4 2.7.7 5.2-.9 6.5-3.5-2.3.8-4.5.8-6.1.2 2.7-2.6 6.3-4.4 11-5.2-3.6 1.8-6.1 4.2-7.5 7.4-1.1 2.4-3.1 3.8-5.6 4.1 5.1 1.3 10.1-1.4 12.6-6.5 1.4-2.8 2-6.1 3-9.9Z"/>
+        </svg>
+      </span>
+      <span class="brand-text">
+        <span class="brand-name">GREENPULSE<span class="brand-ai">.AI</span></span>
+        <span class="brand-subtitle">ENERGY MANAGEMENT SYSTEM (EMS)</span>
       </span>
     </a>
 
-    <p class="nav-heading">WORKSPACE</p>
-    <nav id="navigation">
-      <a href="#overview" class="nav-link active">▦ &nbsp; Overview</a>
-      <a href="#generation" class="nav-link">⌁ &nbsp; Generation</a>
-      <a href="#insights" class="nav-link">✧ &nbsp; Insights</a>
-      <a href="#plants" class="nav-link">▤ &nbsp; Plant Performance</a>
-      <a href="#dsm" class="nav-link">₹ &nbsp; DSM Calculator</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+
+    <nav class="navigation" id="navigation">
+      <a href="#overview" class="nav-link active">⌂ <span>Overview</span></a>
+      <a href="#generation" class="nav-link">⚡ <span>Generation &amp; Forecast</span></a>
+      <a href="#insights" class="nav-link">◈ <span>Insights</span></a>
+      <a href="#plants" class="nav-link">▤ <span>Plant Performance</span></a>
+      <a href="#bess" class="nav-link">🔋 <span>BESS Management</span></a>
+      <a href="#dsm" class="nav-link">₹ <span>DSM Calculator</span></a>
     </nav>
 
-    <div class="sidebar-bottom">
-      <div class="demo-box">
-        <span class="demo-dot"></span>
-        <div>
-          <strong>Demo environment</strong>
-          <small>Simulated generation data</small>
+    <!-- RIGHT SIDE HEADER CONTROLS -->
+    <div class="nav-tools" aria-label="User controls">
+      <span class="live-pill"><i></i> LIVE</span>
+
+      <!-- NOTIFICATIONS -->
+      <details class="nav-menu">
+        <summary class="nav-icon-btn" aria-label="Notifications" title="Notifications">
+          <span class="control-glyph">♧</span>
+          <i class="notification-dot"></i>
+        </summary>
+
+        <div class="nav-popover notification-popover">
+          <div class="popover-heading">
+            <strong>Notifications</strong>
+            <span class="unread-label">DEMO</span>
+          </div>
+
+          <div class="notification-item">
+            <i class="notice-dot green"></i>
+            <div>
+              <strong>System status normal</strong>
+              <small>GreenPulse demo system is online</small>
+            </div>
+          </div>
+
+          <div class="notification-item">
+            <i class="notice-dot blue"></i>
+            <div>
+              <strong>Forecast data refreshed</strong>
+              <small>Illustrative portfolio data loaded</small>
+            </div>
+          </div>
+
+          <div class="notification-item">
+            <i class="notice-dot amber"></i>
+            <div>
+              <strong>Simulation mode enabled</strong>
+              <small>Values are not live plant telemetry</small>
+            </div>
+          </div>
+
+          <button class="popover-action" type="button" data-header-action="notifications">
+            Mark notifications as read
+          </button>
         </div>
-      </div>
-      <p>GREENPULSE ANALYTICS · 2026</p>
+      </details>
+
+      <!-- SETTINGS -->
+      <details class="nav-menu">
+        <summary class="nav-icon-btn" aria-label="Settings" title="Settings">
+          <span class="control-glyph">⚙</span>
+        </summary>
+
+        <div class="nav-popover settings-popover">
+          <div class="popover-heading">
+            <strong>Settings</strong>
+            <span class="unread-label">PREFERENCES</span>
+          </div>
+
+          <div class="settings-row">
+            <div>
+              <strong>Dashboard theme</strong>
+              <small>Dark energy control room</small>
+            </div>
+            <span class="setting-value">ACTIVE</span>
+          </div>
+
+          <div class="settings-row">
+            <div>
+              <strong>Time zone</strong>
+              <small>India Standard Time</small>
+            </div>
+            <span class="setting-value">IST</span>
+          </div>
+
+          <button class="popover-action" type="button" data-header-action="settings">
+            Dashboard preferences
+          </button>
+        </div>
+      </details>
+
+      <!-- ADMINISTRATOR ACCOUNT -->
+      <details class="nav-menu account-menu">
+        <summary class="account-trigger" aria-label="Account menu">
+          <span class="account-avatar">A</span>
+          <span class="account-copy">
+            <strong>Administrator</strong>
+            <small>Demo account</small>
+          </span>
+          <span class="account-chevron">⌄</span>
+        </summary>
+
+        <div class="nav-popover account-popover">
+          <div class="account-profile">
+            <span class="account-avatar large">A</span>
+            <div>
+              <strong>Administrator</strong>
+              <small>GreenPulse EMS</small>
+            </div>
+          </div>
+
+          <button class="account-menu-item" type="button" data-header-action="profile">
+            ♙ &nbsp; Account profile
+          </button>
+
+          <button class="account-menu-item" type="button" data-header-action="login">
+            ↪ &nbsp; Login / Switch account
+          </button>
+
+          <div class="account-demo-note">
+            Frontend demo · Authentication can be connected to the Java backend later.
+          </div>
+        </div>
+      </details>
     </div>
-  </aside>
+  </header>
 
   <main class="main">
 
+    <!-- GLOBAL TOP BAR -->
     <header class="topbar">
-      <button id="menuBtn" class="menu-btn" aria-label="Toggle menu">☰</button>
-      <div class="breadcrumb">Workspace <span>/</span> Overview</div>
+      <div class="breadcrumb" id="breadcrumb">
+        Energy Management System <span>/</span> Overview
+      </div>
+
       <div class="top-actions">
-        <span class="demo-badge">● SIMULATED DATA</span>
-        <span class="avatar">EP</span>
+        <span class="demo-badge"><i></i> SIMULATED DATA</span>
+
+        <div class="live-clock">
+          <span id="liveDate">--</span>
+          <strong id="liveTime">--:--:--</strong>
+          <small>INDIA · IST</small>
+        </div>
       </div>
     </header>
 
-    <section id="overview" class="heading">
+    <!-- PAGE TITLE -->
+    <section class="page-heading">
       <div>
         <p class="eyebrow">RENEWABLE OPERATIONS / PERFORMANCE</p>
-        <h1>Energy Performance <em>Overview</em></h1>
-        <p class="subtitle">
-          Renewable energy forecasting, generation monitoring and deviation intelligence.
+        <h1 id="pageTitle">Energy Performance <em>Overview</em></h1>
+        <p class="subtitle" id="pageSubtitle">
+          Renewable energy forecasting, generation monitoring and operational intelligence.
         </p>
       </div>
+<!-- BESS GAUGE IN PAGE HEADING -->
+<div class="bess-heading-gauge">
+    <span class="gauge-heading">BATTERY STATE OF CHARGE</span>
+
+    <div class="bess-soc-gauge" id="bessSocGauge">
+        <div class="bess-soc-gauge-inner">
+            <strong id="bessGaugePercent">60.0%</strong>
+            <small>STATE OF CHARGE</small>
+        </div>
+    </div>
+</div>
       <div class="report-date">
         <small>REPORTING DATE</small>
-        <strong id="reportDate"></strong>
+        <strong id="reportDate">--</strong>
         <span>Illustrative operating day</span>
       </div>
     </section>
 
-    <!-- DASHBOARD FILTERS -->
-    <section class="filter-panel">
-      <strong class="filter-title">☷ Dashboard Filters</strong>
+    <!-- GLOBAL FILTERS -->
+    <section class="filter-panel" id="filterPanel">
+      <div class="filter-title">
+        <span>☷</span>
+        <strong>Dashboard Filters</strong>
+      </div>
 
       <label>
         <span>ENERGY SOURCE</span>
@@ -83,18 +219,21 @@
           <option value="All">All Sources</option>
           <option value="Wind">Wind</option>
           <option value="Solar">Solar</option>
+          <option value="Hybrid">Hybrid (Wind + Solar)</option>
         </select>
       </label>
 
       <label>
         <span>POWER PLANT</span>
         <select id="plantFilter">
-          <option value="All">All Plants</option>
-          <option value="Wind Farm A">Wind Farm A</option>
-          <option value="Wind Farm B">Wind Farm B</option>
-          <option value="Solar Park A">Solar Park A</option>
-          <option value="Solar Park B">Solar Park B</option>
-        </select>
+    <option value="All">All Plants</option>
+    <option value="Wind Farm A">Wind Farm A</option>
+    <option value="Wind Farm B">Wind Farm B</option>
+    <option value="Solar Park A">Solar Park A</option>
+    <option value="Solar Park B">Solar Park B</option>
+    <option value="Hybrid Farm A">Hybrid Farm A</option>
+    <option value="Hybrid Farm B">Hybrid Farm B</option>
+</select>
       </label>
 
       <label>
@@ -108,314 +247,775 @@
       <button class="reset-btn" id="resetBtn">Reset ↺</button>
     </section>
 
-    <!-- KPI CARDS -->
-    <section class="kpi-grid">
+    <!-- OVERVIEW PAGE -->
+    <section id="overviewPage" class="page-view">
 
-      <article class="kpi featured">
-        <div class="kpi-top">
-          <span>ACTUAL GENERATION</span>
-          <b class="green">↗</b>
+      <div class="control-heading">
+        <div>
+          <p class="eyebrow">RENEWABLE ENERGY OPERATIONS</p>
+          <h2>Energy Control Centre</h2>
+          <p>Portfolio monitoring, forecasting and operational intelligence</p>
         </div>
-        <h2 id="actualKpi">—</h2>
-        <p><i class="dot green-bg"></i> Average actual power</p>
-      </article>
+        <span class="system-status"><i></i> SYSTEM ONLINE · DEMO</span>
+      </div>
 
-      <article class="kpi">
-        <div class="kpi-top">
-          <span>FORECAST GENERATION</span>
-          <b class="blue">⌁</b>
-        </div>
-        <h2 id="forecastKpi">—</h2>
-        <p><i class="dot blue-bg"></i> Average forecast power</p>
-      </article>
+      <!-- KPI STRIP -->
+      <section class="kpi-grid">
+        <article class="kpi featured">
+          <div class="kpi-top"><span>ACTUAL GENERATION</span><b>↗</b></div>
+          <h2 id="actualKpi">—</h2>
+          <p>Average actual power</p>
+        </article>
 
-      <article class="kpi">
-        <div class="kpi-top">
-          <span>FORECAST INDICATOR</span>
-          <b class="purple">◎</b>
-        </div>
-        <h2 id="accuracyKpi">—</h2>
-        <p><i class="dot purple-bg"></i> 100% minus WAPE</p>
-      </article>
+        <article class="kpi">
+          <div class="kpi-top"><span>FORECAST GENERATION</span><b>⌁</b></div>
+          <h2 id="forecastKpi">—</h2>
+          <p>Average forecast power</p>
+        </article>
 
-      <article class="kpi">
-        <div class="kpi-top">
-          <span>NET DEVIATION</span>
-          <b class="orange">⌁</b>
-        </div>
-        <h2 id="deviationKpi">—</h2>
-        <p><i class="dot orange-bg"></i> Actual minus forecast</p>
-      </article>
+        <article class="kpi">
+          <div class="kpi-top"><span>FORECAST INDICATOR</span><b>◎</b></div>
+          <h2 id="accuracyKpi">—</h2>
+          <p>100% minus WAPE</p>
+        </article>
 
-    </section>
+        <article class="kpi">
+          <div class="kpi-top"><span>NET DEVIATION</span><b>⌁</b></div>
+          <h2 id="deviationKpi">—</h2>
+          <p>Actual minus forecast</p>
+        </article>
+      </section>
 
-    <!-- GENERATION CHARTS -->
-    <section id="generation" class="chart-grid">
+      <!-- CONTROL CENTRE GRID -->
+      <div class="control-grid">
 
-      <article class="panel">
-        <div class="panel-head">
-          <div>
-            <p class="eyebrow">GENERATION TREND</p>
-            <h3>Actual vs Forecast</h3>
-            <p>Power profile by sample interval · MW</p>
+        <article class="panel flow-panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">PORTFOLIO OVERVIEW</p>
+              <h3>Renewable Energy Flow</h3>
+            </div>
+            <span class="panel-icon">⚡</span>
           </div>
-          <div class="legend">
-            <span><i class="dot green-bg"></i> Actual</span>
-            <span><i class="dot blue-bg"></i> Forecast</span>
+
+          <div class="energy-flow">
+            <div class="flow-source">
+              <span class="flow-icon solar-icon">☀</span>
+              <div><strong>Solar Generation</strong><small>Solar Park A &amp; B</small></div>
+              <b id="flowSolar">—</b>
+            </div>
+
+            <div class="flow-connector"><i></i></div>
+
+            <div class="flow-source">
+              <span class="flow-icon wind-icon">♧</span>
+              <div><strong>Wind Generation</strong><small>Wind Farm A &amp; B</small></div>
+              <b id="flowWind">—</b>
+            </div>
+
+            <div class="flow-connector"><i></i></div>
+
+            <div class="flow-source">
+              <span class="flow-icon battery-icon">▣</span>
+              <div><strong>Battery Storage</strong><small>Simulated BESS</small></div>
+              <b id="flowSoc">—</b>
+            </div>
           </div>
-        </div>
 
-        <div class="chart-container">
-          <canvas id="generationChart"></canvas>
-        </div>
+          <p class="panel-foot">Illustrative portfolio flow · Not live electrical telemetry</p>
+        </article>
 
-        <p class="panel-foot">
-          Illustrative values, not real-time plant readings
-        </p>
-      </article>
-
-      <article class="panel">
-        <div class="panel-head">
-          <div>
-            <p class="eyebrow">PORTFOLIO BREAKDOWN</p>
-            <h3>Generation Mix</h3>
-            <p>Average actual power by source</p>
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">GENERATION MIX</p>
+              <h3>Wind vs Solar</h3>
+            </div>
+            <span class="panel-icon">◉</span>
           </div>
-        </div>
 
-        <div class="donut-container">
-          <canvas id="mixChart"></canvas>
-          <div class="donut-center">
-            <strong id="mixTotal">—</strong>
-            <small>AVG MW</small>
+          <div class="donut-container">
+            <canvas id="mixChart"></canvas>
+            <div class="donut-center">
+              <strong id="mixTotal">—</strong>
+              <small>AVG MW</small>
+            </div>
           </div>
-        </div>
 
-        <div class="mix-row">
-          <span>🟢 Wind</span>
-          <b id="windMix">—</b>
-          <span id="windPct">—</span>
-        </div>
-
-        <div class="mix-row">
-          <span>🔵 Solar</span>
-          <b id="solarMix">—</b>
-          <span id="solarPct">—</span>
-        </div>
-      </article>
-
-    </section>
-
-    <!-- ANALYTICS -->
-    <section id="insights" class="chart-grid insights-grid">
-
-      <article class="panel">
-        <div class="panel-head">
-          <div>
-            <p class="eyebrow">FORECAST QUALITY</p>
-            <h3>Deviation Analysis</h3>
-            <p>Absolute error by sample interval · MW</p>
+          <div class="mix-row">
+            <span><i class="dot green-bg"></i> Wind</span>
+            <b id="windMix">—</b>
+            <small id="windPct">—</small>
           </div>
-        </div>
 
-        <div class="error-container">
-          <canvas id="errorChart"></canvas>
-        </div>
-
-        <div class="metrics-row">
-          <div>
-            <small>Mean Absolute Error</small>
-            <strong id="maeValue">—</strong>
+          <div class="mix-row">
+            <span><i class="dot blue-bg"></i> Solar</span>
+            <b id="solarMix">—</b>
+            <small id="solarPct">—</small>
           </div>
-          <div>
-            <small>WAPE</small>
+        </article>
+
+        <article class="panel trend-panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">PORTFOLIO PERFORMANCE</p>
+              <h3>Actual vs Forecast Trend</h3>
+              <p>Hourly generation profile · MW</p>
+            </div>
+            <span class="chart-tag">24H DEMO</span>
+          </div>
+
+          <div class="chart-container">
+            <canvas id="generationChart"></canvas>
+          </div>
+
+          <p class="panel-foot">Values are illustrative hourly sample data</p>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">FORECAST QUALITY</p>
+              <h3>Forecast Intelligence</h3>
+            </div>
+            <span class="panel-icon">⌁</span>
+          </div>
+
+          <div class="accuracy-display" id="overviewAccuracy">—</div>
+          <p class="muted-text">Forecast indicator · 100% minus WAPE</p>
+
+          <div class="metric-line">
+            <span>Mean absolute error</span>
+            <strong id="overviewMae">—</strong>
+          </div>
+
+          <div class="metric-line">
+            <span>WAPE</span>
             <strong id="wapeValue">—</strong>
           </div>
-        </div>
-      </article>
 
-      <article class="panel">
-        <p class="eyebrow">OPERATIONS SNAPSHOT</p>
-        <h3>Performance Notes</h3>
+          <div class="metric-line">
+            <span>Net deviation</span>
+            <strong id="overviewDeviation">—</strong>
+          </div>
+        </article>
 
-        <div class="insight-box">
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">ENERGY STORAGE</p>
+              <h3>BESS Status</h3>
+            </div>
+            <span class="panel-icon">🔋</span>
+          </div>
+
+          <div class="soc-display" id="overviewSoc">—</div>
+          <p class="muted-text">Battery state of charge</p>
+          <div class="soc-track"><div id="overviewSocBar" class="soc-fill"></div></div>
+
+          <div class="metric-line">
+            <span>Operating mode</span>
+            <strong id="overviewBessMode">—</strong>
+          </div>
+
+          <div class="metric-line">
+            <span>Stored energy</span>
+            <strong id="overviewBessEnergy">—</strong>
+          </div>
+
+          <p class="panel-foot">20 MW / 40 MWh simulated battery</p>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">ASSET MONITORING</p>
+              <h3>Plant Performance</h3>
+            </div>
+            <span class="panel-icon">▤</span>
+          </div>
+
+          <div class="plant-highlight">
+            <span>Wind Farm A</span><strong>Operational</strong>
+          </div>
+          <div class="plant-highlight">
+            <span>Wind Farm B</span><strong>Operational</strong>
+          </div>
+          <div class="plant-highlight">
+            <span>Solar Park A</span><strong>Operational</strong>
+          </div>
+          <div class="plant-highlight">
+            <span>Solar Park B</span><strong>Operational</strong>
+          </div>
+
+          <p class="panel-foot">Demo asset list · Status is illustrative</p>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">OPERATIONS INTELLIGENCE</p>
+              <h3>Performance Insight</h3>
+            </div>
+            <span class="panel-icon">✦</span>
+          </div>
+
           <strong id="insightTitle">Analyzing generation</strong>
-          <p id="insightText">Loading...</p>
-        </div>
+          <p class="insight-text" id="insightText">Loading portfolio analysis...</p>
+          <p class="panel-foot">Rule-based summary from simulated data</p>
+        </article>
 
-        <div class="ml-box">
-          <span>✦ FUTURE DEVELOPMENT · PLANNED</span>
-          <h4>Python ML Forecasting</h4>
-          <p>
-            Future integration of weather data, historical generation
-            and machine learning models for renewable energy prediction.
-          </p>
-        </div>
-      </article>
+      </div>
 
-    </section>
-
-    <!-- PLANT PERFORMANCE -->
-    <section id="plants" class="panel section-panel">
-
-      <div class="panel-head">
+      <!-- FEATURE NAVIGATION -->
+      <div class="feature-heading">
         <div>
-          <p class="eyebrow">ASSET PERFORMANCE</p>
-          <h3>Plant-Wise Generation</h3>
-          <p>Average MW for the selected sample intervals</p>
+          <p class="eyebrow">OPERATIONAL WORKSPACE</p>
+          <h2>Explore Energy Modules</h2>
         </div>
+        <span>SELECT A MODULE TO OPEN DETAILS ↗</span>
+      </div>
 
-        <button class="export-btn" id="exportBtn">
-          ↓ Export CSV
+      <div class="feature-grid">
+        <button class="feature-card" data-page="generation">
+          <span class="feature-icon">⚡</span>
+          <strong>Generation &amp; Forecast</strong>
+          <small>Actual vs forecast, generation mix and hourly trends</small>
+          <span class="feature-link">View details →</span>
+        </button>
+
+        <button class="feature-card" data-page="insights">
+          <span class="feature-icon">◈</span>
+          <strong>Insights &amp; Analytics</strong>
+          <small>Deviation analysis, forecast quality and performance notes</small>
+          <span class="feature-link">View details →</span>
+        </button>
+
+        <button class="feature-card" data-page="plants">
+          <span class="feature-icon">▤</span>
+          <strong>Plant Performance</strong>
+          <small>Plant-wise generation, deviation and CSV reporting</small>
+          <span class="feature-link">View details →</span>
+        </button>
+
+        <button class="feature-card" data-page="bess">
+          <span class="feature-icon">🔋</span>
+          <strong>BESS Management</strong>
+          <small>Battery SOC, simulated dispatch and operating limits</small>
+          <span class="feature-link">View details →</span>
+        </button>
+
+        <button class="feature-card" data-page="dsm">
+          <span class="feature-icon">₹</span>
+          <strong>DSM Calculator</strong>
+          <small>Deviation energy and indicative financial exposure</small>
+          <span class="feature-link">View details →</span>
         </button>
       </div>
-
-      <div class="table-scroll">
-        <table>
-          <thead>
-            <tr>
-              <th>POWER PLANT</th>
-              <th>SOURCE</th>
-              <th>FORECAST MW</th>
-              <th>ACTUAL MW</th>
-              <th>DEVIATION MW</th>
-              <th>FORECAST INDICATOR</th>
-            </tr>
-          </thead>
-          <tbody id="plantTable"></tbody>
-        </table>
+    </section>
+        <!-- GENERATION PAGE -->
+    <section id="generation" class="page-view page-hidden">
+      <div class="section-intro">
+        <p class="eyebrow">RENEWABLE GENERATION MONITORING</p>
+        <h2>Generation &amp; Forecast</h2>
+        <p>Compare actual renewable output with forecast generation.</p>
       </div>
 
+      <div class="chart-grid">
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">GENERATION TREND</p>
+              <h3>Actual vs Forecast</h3>
+              <p>Power profile by sample interval · MW</p>
+            </div>
+            <div class="legend">
+              <span><i class="dot green-bg"></i> Actual</span>
+              <span><i class="dot blue-bg"></i> Forecast</span>
+            </div>
+          </div>
+          <div class="chart-container"><canvas id="generationDetailChart"></canvas></div>
+          <p class="panel-foot">Illustrative values, not real-time plant readings</p>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">PORTFOLIO BREAKDOWN</p>
+              <h3>Generation Mix</h3>
+              <p>Average actual power by source</p>
+            </div>
+          </div>
+          <div class="donut-container">
+            <canvas id="mixDetailChart"></canvas>
+            <div class="donut-center">
+              <strong id="mixDetailTotal">—</strong>
+              <small>AVG MW</small>
+            </div>
+          </div>
+          <div class="mix-row"><span>Wind</span><b id="windDetailMix">—</b><small id="windDetailPct">—</small></div>
+          <div class="mix-row"><span>Solar</span><b id="solarDetailMix">—</b><small id="solarDetailPct">—</small></div>
+        </article>
+      </div>
+
+      <article class="panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">NEXT-DAY PLANNING</p>
+            <h3>Hourly Forecast Profile</h3>
+            <p>Illustrative forecast profile based on demo hourly data</p>
+          </div>
+          <span class="chart-tag">DEMO FORECAST</span>
+        </div>
+        <div class="chart-container"><canvas id="forecastChart"></canvas></div>
+      </article>
     </section>
 
-    <!-- DSM CALCULATOR -->
-    <section id="dsm" class="panel section-panel">
+    <!-- INSIGHTS PAGE -->
+    <section id="insights" class="page-view page-hidden">
+      <div class="section-intro">
+        <p class="eyebrow">PERFORMANCE INTELLIGENCE</p>
+        <h2>Insights &amp; Analytics</h2>
+        <p>Understand generation deviation and forecast performance.</p>
+      </div>
 
+      <div class="chart-grid insights-grid">
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">FORECAST QUALITY</p>
+              <h3>Deviation Analysis</h3>
+              <p>Absolute error by sample interval · MW</p>
+            </div>
+          </div>
+          <div class="error-container"><canvas id="errorChart"></canvas></div>
+          <div class="metrics-row">
+            <div><small>Mean Absolute Error</small><strong id="maeValue">—</strong></div>
+            <div><small>WAPE</small><strong id="insightsWape">—</strong></div>
+            <div><small>Forecast Indicator</small><strong id="insightsAccuracy">—</strong></div>
+          </div>
+        </article>
+
+        <article class="panel">
+          <p class="eyebrow">OPERATIONS SNAPSHOT</p>
+          <h3>Performance Notes</h3>
+          <div class="insight-box">
+            <strong id="insightTitleDetail">Analyzing generation</strong>
+            <p id="insightTextDetail">Loading...</p>
+          </div>
+          <div class="ml-box">
+            <span>✦ FUTURE DEVELOPMENT · PLANNED</span>
+            <h4>AI / ML Forecasting</h4>
+            <p>Future integration of weather data, historical generation and machine learning models for renewable energy prediction.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- PLANT PERFORMANCE PAGE -->
+    <section id="plants" class="page-view page-hidden">
+      <div class="section-intro">
+        <p class="eyebrow">ASSET PERFORMANCE</p>
+        <h2>Plant Performance</h2>
+        <p>Compare plant-wise actual and forecast generation.</p>
+      </div>
+
+      <article class="panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">PLANT-WISE REPORT</p>
+            <h3>Generation Performance Table</h3>
+            <p>Average MW for the selected sample intervals</p>
+          </div>
+          <button class="export-btn" id="exportBtn">↓ Export CSV</button>
+        </div>
+
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>POWER PLANT</th>
+                <th>SOURCE</th>
+                <th>FORECAST MW</th>
+                <th>ACTUAL MW</th>
+                <th>DEVIATION MW</th>
+                <th>FORECAST INDICATOR</th>
+              </tr>
+            </thead>
+            <tbody id="plantTable"></tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+
+<!-- BESS PAGE -->
+<section id="bess" class="page-view page-hidden">
+
+   
+
+    <!-- ENERGY STORAGE HEADING - ONLY ONCE -->
+    <div class="section-intro bess-intro">
+        <div>
+            <p class="eyebrow">ENERGY STORAGE MANAGEMENT</p>
+            <h2>Battery Energy Storage System</h2>
+            <p>Monitor battery health, stored energy, power flow and operating performance.</p>
+        </div>
+        <span class="bess-demo-status"><i></i> SIMULATED BESS</span>
+    </div>
+
+
+    
+  <!-- BESS KPI CARDS -->
+  <div class="bess-kpi-grid">
+
+    <article class="bess-stat bess-stat-soc">
+      <div class="bess-stat-heading">
+        <span>STATE OF CHARGE</span>
+        <span class="bess-kpi-icon">▰</span>
+      </div>
+      <strong id="bessSoc">60%</strong>
+      <div class="soc-track">
+        <div id="bessSocBar" class="soc-fill"></div>
+      </div>
+      <small id="bessSocEnergy">24.0 MWh stored</small>
+    </article>
+
+    <article class="bess-stat">
+      <div class="bess-stat-heading">
+        <span>BATTERY POWER</span>
+        <span class="bess-kpi-icon">⚡</span>
+      </div>
+      <strong>20 MW</strong>
+      <small>Maximum rated power</small>
+    </article>
+
+    <article class="bess-stat">
+      <div class="bess-stat-heading">
+        <span>ENERGY CAPACITY</span>
+        <span class="bess-kpi-icon">▣</span>
+      </div>
+      <strong>40 MWh</strong>
+      <small>Installed demo capacity</small>
+    </article>
+
+    <article class="bess-stat">
+      <div class="bess-stat-heading">
+        <span>OPERATING MODE</span>
+        <span class="bess-kpi-icon">◉</span>
+      </div>
+      <strong id="bessMode">IDLE</strong>
+      <small id="bessPower">0.0 MW</small>
+    </article>
+
+    <article class="bess-stat">
+      <div class="bess-stat-heading">
+        <span>AVAILABLE ENERGY</span>
+        <span class="bess-kpi-icon">↗</span>
+      </div>
+      <strong id="bessAvailableEnergy">20.00 MWh</strong>
+      <small>Above minimum SOC limit</small>
+    </article>
+
+    <article class="bess-stat">
+      <div class="bess-stat-heading">
+        <span>CHARGE HEADROOM</span>
+        <span class="bess-kpi-icon">↙</span>
+      </div>
+      <strong id="bessHeadroom">12.00 MWh</strong>
+      <small>Below maximum SOC limit</small>
+    </article>
+
+  </div>
+
+  <!-- MAIN BESS DASHBOARD -->
+  <div class="bess-main-grid">
+
+    <!-- BATTERY VISUAL -->
+    <article class="panel bess-visual-panel">
       <div class="panel-head">
         <div>
-          <p class="eyebrow">SETTLEMENT ANALYTICS</p>
-          <h3>DSM Deviation Calculator</h3>
-          <p>Estimate deviation energy and indicative financial exposure.</p>
+          <p class="eyebrow">BATTERY MONITORING</p>
+          <h3>Battery Energy Status</h3>
+          <p>Visual representation of stored battery energy</p>
         </div>
-        <span class="demo-badge">DEMO ESTIMATE</span>
+        <span class="bess-live-tag">DEMO STATUS</span>
       </div>
 
-      <div class="dsm-grid">
+      <div class="battery-visual-layout">
 
-        <div class="dsm-form">
-
-          <label>
-            Scheduled Generation (MW)
-            <input id="dsmSchedule" type="number"
-              min="0" step="0.01" value="100">
-          </label>
-
-          <label>
-            Actual Generation (MW)
-            <input id="dsmActual" type="number"
-              min="0" step="0.01" value="92">
-          </label>
-
-          <label>
-            Settlement Interval
-            <select id="dsmInterval">
-              <option value="15">15 Minutes</option>
-              <option value="30">30 Minutes</option>
-              <option value="60">60 Minutes</option>
-            </select>
-          </label>
-
-          <label>
-            Assumed Rate (₹/MWh)
-            <input id="dsmRate" type="number"
-              min="0" step="1" value="5000">
-          </label>
-
-          <label>
-            Grid Frequency (Hz) · Reference only
-            <input id="dsmFrequency" type="number"
-              min="45" max="55" step="0.01" value="50">
-          </label>
-
-          <button id="calculateDsm" class="calculate-btn">
-            Calculate Deviation →
-          </button>
-
+        <div class="battery-graphic">
+          <div class="battery-terminal"></div>
+          <div class="battery-shell">
+            <div class="battery-fill" id="bessBatteryFill"></div>
+            <div class="battery-grid-lines"></div>
+          </div>
         </div>
 
-        <div class="dsm-results">
+      
+        <div class="battery-reading">
+          <span class="battery-reading-label">CURRENT SOC</span>
+          <strong id="bessBatteryPercent">60.0%</strong>
+          <span class="battery-reading-unit">STATE OF CHARGE</span>
 
-          <div class="result-heading">
-            <span>CALCULATION OUTPUT</span>
-            <b id="dsmStatus">UNDER-INJECTION</b>
+          <div class="battery-reading-divider"></div>
+
+          <div class="battery-reading-row">
+            <span>Stored energy</span>
+            <strong id="bessBatteryEnergy">24.00 MWh</strong>
           </div>
 
-          <div class="result-total">
-            <small>Indicative Deviation Value</small>
-            <h2 id="dsmAmount">—</h2>
-            <p>Absolute deviation energy × assumed rate</p>
+          <div class="battery-reading-row">
+            <span>Minimum SOC</span>
+            <strong>10%</strong>
           </div>
 
-          <div class="result-grid">
-            <div>
-              <small>Deviation</small>
-              <strong id="dsmDeviation">—</strong>
-            </div>
-
-            <div>
-              <small>Deviation Energy</small>
-              <strong id="dsmEnergy">—</strong>
-            </div>
-
-            <div>
-              <small>Deviation Percentage</small>
-              <strong id="dsmPercent">—</strong>
-            </div>
-
-            <div>
-              <small>Grid Frequency</small>
-              <strong id="dsmFreq">—</strong>
-            </div>
+          <div class="battery-reading-row">
+            <span>Maximum SOC</span>
+            <strong>90%</strong>
           </div>
 
-          <div class="formula">
-            <strong>Calculation Method</strong>
-            <p>Deviation MW = Actual − Schedule</p>
-            <p>Deviation MWh = Deviation MW × Interval Hours</p>
-            <p>Indicative Value = |Deviation MWh| × Assumed Rate</p>
+          <div class="battery-mode-indicator">
+            <i></i>
+            <span id="bessModeLabel">IDLE MODE</span>
           </div>
-
         </div>
 
       </div>
+    </article>
+
+    <!-- POWER TREND -->
+    <article class="panel bess-trend-panel">
+      <div class="panel-head">
+        <div>
+          <p class="eyebrow">POWER PERFORMANCE</p>
+          <h3>Actual vs Forecast Power</h3>
+          <p>Portfolio power profile · MW</p>
+        </div>
+        <span class="bess-chart-badge">24H PROFILE</span>
+      </div>
+
+      <div class="bess-chart-container bess-power-chart">
+        <canvas id="bessPowerChart"></canvas>
+      </div>
+
+      <div class="bess-chart-legend">
+        <span><i class="legend-actual"></i> Actual generation</span>
+        <span><i class="legend-forecast"></i> Forecast generation</span>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- EXISTING SOC CHART AND CONFIGURATION -->
+  <div class="bess-content-grid">
+
+    <article class="panel">
+      <div class="panel-head">
+        <div>
+          <p class="eyebrow">BATTERY PERFORMANCE</p>
+          <h3>State of Charge Trend</h3>
+          <p>Simulated SOC across selected intervals · %</p>
+        </div>
+        <span class="bess-chart-badge">SOC TREND</span>
+      </div>
+
+      <div class="bess-chart-container">
+        <canvas id="bessChart"></canvas>
+      </div>
+    </article>
+
+    <article class="panel bess-configuration">
+      <p class="eyebrow">BATTERY CONFIGURATION</p>
+      <h3>Operating Limits</h3>
+
+      <div class="bess-detail-row">
+        <span>Minimum SOC</span>
+        <strong>10%</strong>
+      </div>
+
+      <div class="bess-detail-row">
+        <span>Maximum SOC</span>
+        <strong>90%</strong>
+      </div>
+
+      <div class="bess-detail-row">
+        <span>Initial SOC</span>
+        <strong>60%</strong>
+      </div>
+
+      <div class="bess-detail-row">
+        <span>Rated power</span>
+        <strong>20 MW</strong>
+      </div>
+
+      <div class="bess-detail-row">
+        <span>Energy capacity</span>
+        <strong>40 MWh</strong>
+      </div>
+
+      <div class="bess-detail-row">
+        <span>Round-trip efficiency</span>
+        <strong>90%</strong>
+      </div>
+
+      <div class="bess-recommendation">
+        <span>✦ SIMULATED OPERATING RECOMMENDATION</span>
+        <strong id="bessRecommendation">Analyzing portfolio...</strong>
+        <p id="bessRecommendationText">Recommendation will appear here.</p>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- OPERATING SUMMARY -->
+  <article class="panel bess-summary-panel">
+    <div class="panel-head">
+      <div>
+        <p class="eyebrow">SYSTEM INFORMATION</p>
+        <h3>Battery Operating Summary</h3>
+        <p>Current simulated battery operating parameters</p>
+      </div>
+      <span class="bess-chart-badge">SYSTEM SUMMARY</span>
+    </div>
+
+    <div class="table-scroll">
+      <table class="bess-summary-table">
+        <thead>
+          <tr>
+            <th>PARAMETER</th>
+            <th>VALUE</th>
+            <th>UNIT</th>
+            <th>STATUS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>State of Charge</td>
+            <td id="bessTableSoc">60.0</td>
+            <td>%</td>
+            <td><span class="bess-table-status">SIMULATED</span></td>
+          </tr>
+          <tr>
+            <td>Stored Energy</td>
+            <td id="bessTableEnergy">24.00</td>
+            <td>MWh</td>
+            <td><span class="bess-table-status">SIMULATED</span></td>
+          </tr>
+          <tr>
+            <td>Battery Power</td>
+            <td id="bessTablePower">0.00</td>
+            <td>MW</td>
+            <td><span class="bess-table-status">SIMULATED</span></td>
+          </tr>
+          <tr>
+            <td>Operating Mode</td>
+            <td id="bessTableMode">IDLE</td>
+            <td>—</td>
+            <td><span class="bess-table-status">SIMULATED</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </article>
+
+  <div class="disclaimer">
+    <strong>Demo assumptions:</strong>
+    Battery specifications and dispatch logic are illustrative. This dashboard does not connect to a real BESS controller or issue operational commands.
+  </div>
+
+</section>
+
+    <!-- DSM PAGE -->
+    <section id="dsm" class="page-view page-hidden">
+      <div class="section-intro">
+        <p class="eyebrow">SETTLEMENT ANALYTICS</p>
+        <h2>DSM Deviation Calculator</h2>
+        <p>Estimate deviation energy and indicative financial exposure.</p>
+      </div>
+
+      <article class="panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">DEVIATION ESTIMATOR</p>
+            <h3>DSM Calculation</h3>
+            <p>Enter schedule, actual generation and assumed rate.</p>
+          </div>
+          <span class="demo-badge">DEMO ESTIMATE</span>
+        </div>
+
+        <div class="dsm-grid">
+          <div class="dsm-form">
+            <label>Scheduled Generation (MW)
+              <input id="dsmSchedule" type="number" min="0" step="0.01" value="100">
+            </label>
+            <label>Actual Generation (MW)
+              <input id="dsmActual" type="number" min="0" step="0.01" value="92">
+            </label>
+            <label>Settlement Interval
+              <select id="dsmInterval">
+                <option value="15">15 Minutes</option>
+                <option value="30">30 Minutes</option>
+                <option value="60">60 Minutes</option>
+              </select>
+            </label>
+            <label>Assumed Rate (₹/MWh)
+              <input id="dsmRate" type="number" min="0" step="1" value="5000">
+            </label>
+            <label>Grid Frequency (Hz) · Reference only
+              <input id="dsmFrequency" type="number" min="45" max="55" step="0.01" value="50">
+            </label>
+            <button id="calculateDsm" class="calculate-btn">Calculate Deviation →</button>
+          </div>
+
+          <div class="dsm-results">
+            <div class="result-heading">
+              <span>CALCULATION OUTPUT</span>
+              <b id="dsmStatus">UNDER-INJECTION</b>
+            </div>
+
+            <div class="result-total">
+              <small>Indicative Deviation Value</small>
+              <h2 id="dsmAmount">—</h2>
+              <p>Absolute deviation energy × assumed rate</p>
+            </div>
+
+            <div class="result-grid">
+              <div><small>Deviation</small><strong id="dsmDeviation">—</strong></div>
+              <div><small>Deviation Energy</small><strong id="dsmEnergy">—</strong></div>
+              <div><small>Deviation Percentage</small><strong id="dsmPercent">—</strong></div>
+              <div><small>Grid Frequency</small><strong id="dsmFreq">—</strong></div>
+            </div>
+
+            <div class="formula">
+              <strong>Calculation Method</strong>
+              <p>Deviation MW = Actual − Schedule</p>
+              <p>Deviation MWh = Deviation MW × Interval Hours</p>
+              <p>Indicative Value = |Deviation MWh| × Assumed Rate</p>
+            </div>
+          </div>
+        </div>
+      </article>
 
       <div class="disclaimer">
         <strong>Important:</strong>
-        This is a simplified educational DSM estimator, not an official
-        settlement calculator. Actual charges or credits depend on
-        applicable regulations, generator category, contractual schedule,
-        deviation limits and settlement rates. Grid frequency is displayed
-        for reference and does not affect this demo calculation.
+        This is a simplified educational DSM estimator, not an official settlement calculator. Actual charges or credits depend on applicable regulations, generator category, contractual schedule, deviation limits and settlement rates.
       </div>
-
     </section>
 
-    <!-- UPDATED FOOTER -->
+    <!-- GREENPULSE FOOTER -->
     <footer class="main-footer">
-
       <div class="footer-brand">
-        GREENPULSE · ENERGY INTELLIGENCE
+        GREENPULSE.AI <span>·</span> ENERGY INTELLIGENCE
       </div>
 
       <div class="footer-credit">
-        Designed &amp; Developed with ❤️ by
-        <strong>Samya Sarkar </strong>
+        Designed &amp; Developed with <span class="footer-heart">❤️</span> by
+        <strong>Samya Sarkar</strong>
       </div>
 
       <div class="footer-version">
-        Frontend Prototype · v2.1 · 2026
+        Frontend Prototype <span>·</span> v2.6 <span>·</span> 2026
       </div>
-
     </footer>
 
   </main>

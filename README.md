@@ -1,140 +1,139 @@
-# 🌱 GreenPulse – Renewable Energy Intelligence Dashboard
+# GREENPULSE.AI — Energy Management System (EMS)
 
-**Monitor. Analyse. Optimise.**
+**A Renewable Energy Monitoring, Forecasting & Analytics Dashboard**
 
-GreenPulse is a responsive renewable energy analytics dashboard designed to monitor wind and solar power generation, compare actual vs forecast generation, analyse plant performance, and visualize important operational metrics.
+[Live Demo](https://greenpulseai1.netlify.app/) | [GitHub Repository](https://github.com/SamyaSarkar1/greenpulse-renewable-energy-dashboard)
 
-## 🚀 Live Demo
+---
 
-<https://greenpulseavsf.netlify.app/>
+## Overview
 
-**Explore the live GreenPulse dashboard:**  
-[Click Here to View GreenPulse](https://greenpulseavsf.netlify.app/)
+GREENPULSE.AI is a modern Energy Management System (EMS) dashboard designed to monitor, analyze, and visualize renewable energy generation and forecasting performance.
 
-## 📌 Project Overview
+The platform brings wind, solar, and hybrid energy operations into a unified dashboard, helping users understand generation performance, compare actual and forecast energy, monitor battery storage, and evaluate operational insights.
 
-GreenPulse provides a centralized dashboard for analysing renewable energy generation data. It helps users understand the difference between actual and forecast power generation through interactive charts, key performance indicators (KPIs), plant-level analysis, and deviation calculations.
+## Key Features
 
-The project focuses on renewable energy operations, power forecasting, and energy data analytics.
+### 1. Overview Dashboard
+- Centralized renewable energy monitoring.
+- Key performance indicators (KPIs).
+- Generation and forecast summaries.
+- Energy source, plant, and time-window filters.
 
-## ✨ Key Features
+### 2. Generation & Forecast
+- Actual vs. forecast generation comparison.
+- Wind, Solar, and Hybrid plant monitoring.
+- Interactive generation charts.
+- Plant and energy-source filtering.
 
-- **Renewable Energy KPI Monitoring:** View actual generation, forecast generation, forecast accuracy, and deviation.
-- **Actual vs Forecast Analysis:** Compare actual and forecast power generation over selected time periods.
-- **Wind & Solar Generation Analysis:** Monitor generation contributions from wind and solar sources.
-- **Interactive Charts:** Visualize generation trends and forecast errors using Chart.js.
-- **Plant-wise Performance:** Analyse individual renewable energy plant performance.
-- **Forecast Deviation Analysis:** Identify differences between actual and forecast generation.
-- **DSM Deviation Calculator:** Calculate deviation percentage and indicative deviation charges.
-- **Interactive Filters:** Filter information by energy source, plant, and time period.
-- **CSV Export:** Export plant performance data for further analysis.
-- **Responsive Interface:** Designed for desktop, tablet, and mobile devices.
+### 3. Insights & Analytics
+- Generation performance analysis.
+- Forecast comparison and trend visualization.
+- Operational insights and analytics.
 
-## 📊 Dashboard Modules
+### 4. Plant Performance
+- Individual renewable plant monitoring.
+- Wind Farm A and Wind Farm B.
+- Solar Park A and Solar Park B.
+- Hybrid Farm A and Hybrid Farm B.
+- Plant-level generation and forecast information.
 
-1. Renewable Energy Overview
-2. Actual vs Forecast Generation
-3. Wind and Solar Generation Mix
-4. Forecast Error Analysis
-5. Plant Performance Monitoring
-6. Operational Insights
-7. DSM Deviation Calculator
-8. Plant Data Export
+### 5. BESS Management
+- Battery Energy Storage System monitoring.
+- Battery State of Charge (SOC) visualization.
+- Charging and discharging simulation.
+- Available energy and charge headroom indicators.
+- Battery power monitoring.
+- SOC trend visualization.
+- Operating mode and recommendations.
 
-## 🛠️ Technologies Used
+### 6. DSM Calculator
+- Dedicated Deviation Settlement Mechanism calculator interface.
+- Operational calculation support.
+- Designed to support renewable energy deviation analysis.
 
-| Technology | Purpose |
+### 7. Dashboard Interface
+- Modern dark-themed EMS interface.
+- Multi-page navigation.
+- Live-status indicator.
+- Notification and settings controls.
+- Administrator account interface.
+- Responsive dashboard layout.
+
+## Supported Energy Sources
+
+| Energy Source | Supported Plants |
 |---|---|
-| HTML5 | Dashboard structure |
-| CSS3 | Styling and responsive design |
-| JavaScript | Interactive functionality |
-| Chart.js | Data visualization |
-| Git | Version control |
-| GitHub | Source code management |
-| Netlify | Frontend deployment |
+| Wind | Wind Farm A, Wind Farm B |
+| Solar | Solar Park A, Solar Park B |
+| Hybrid | Hybrid Farm A, Hybrid Farm B |
 
-## 📁 Project Structure
+## Technology Stack
+
+- **HTML5** — Dashboard structure
+- **CSS3** — Styling and responsive interface
+- **JavaScript** — Dashboard functionality
+- **Chart.js** — Data visualization
+- **Netlify** — Frontend deployment
+- **Git & GitHub** — Version control
+
+## Project Structure
 
 ```text
-GreenPulse/
-│
+GreenPulse-AI/
 ├── index.html
 ├── style.css
 ├── script.js
 └── README.md
 ```
 
-## 💻 Installation & Setup
+## Getting Started
 
-Follow these steps to run the project locally.
-
-**1. Clone the repository**
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/SamyaSarkar1/greenpulse-renewable-energy-dashboard.git
 ```
 
-**2. Navigate to the project folder**
+### 2. Navigate to the Project
 
 ```bash
 cd greenpulse-renewable-energy-dashboard
 ```
 
-**3. Open the project**
+### 3. Run the Application
 
-Open `index.html` in your web browser.
+Open `index.html` in your browser, or use the Live Server extension in VS Code.
 
-No backend or database configuration is required for the current frontend version.
+## Project Status
 
-## 📈 Project Applications
+**Frontend Development: Implemented**
 
-GreenPulse demonstrates concepts related to:
+The current dashboard uses demonstration/simulated data for plant generation, forecasting, and battery operations. It is not yet connected to live plant telemetry or a production backend.
 
-- Renewable energy generation monitoring
-- Wind and solar power analytics
-- Actual vs forecast comparison
-- Forecast deviation analysis
-- Plant-level performance monitoring
-- Energy data visualization
-- Power market and operational analytics
+## Future Enhancements
 
-## 🔮 Future Enhancements
+- Java Spring Boot backend integration.
+- MySQL or PostgreSQL database.
+- Secure authentication and role-based access control.
+- Real-time renewable energy generation data integration.
+- Live wind and solar forecasting.
+- AI/ML-based generation forecasting.
+- Historical generation and performance reports.
+- Advanced BESS optimization and monitoring.
+- Enhanced DSM analysis and reporting.
 
-The following features are planned for future development:
+## Live Demo
 
-- Java Spring Boot backend integration
-- MySQL database for historical generation data
-- Real-time wind and solar generation data integration
-- Python-based machine learning forecasting
-- Weather API integration
-- Advanced forecast accuracy analysis
-- Historical generation trend analysis
-- Automated reports and operational alerts
+**GREENPULSE.AI:** https://greenpulseai1.netlify.app/
 
-## 📌 Current Project Status
-
-**Status:** Frontend prototype developed and deployed.
-
-The current dashboard uses sample/demo generation data to demonstrate its features. It is not yet connected to live renewable energy plant data or a production backend.
-
-## 🎯 Project Objective
-
-The objective of GreenPulse is to demonstrate how renewable energy generation data can be monitored, compared, and analysed through an interactive dashboard.
-
-The project aims to improve visibility into actual versus forecast generation, plant performance, and renewable energy data analytics.
-
-## 👨‍💻 Developed By
+## Developer
 
 **Samya Sarkar**
 
-*Interested in Power Forecasting, Renewable Energy Analytics, and Energy Data Analysis.*
-
-- **GitHub:** [SamyaSarkar1](https://github.com/SamyaSarkar1)
-- **Project Repository:** [GreenPulse GitHub](https://github.com/SamyaSarkar1/greenpulse-renewable-energy-dashboard)
-- **Live Dashboard:** [greenpulseavsf.netlify.app](https://greenpulseavsf.netlify.app/)
+- GitHub: https://github.com/SamyaSarkar1
+- LinkedIn: https://www.linkedin.com/in/samya-sarkar-a1b62726b/
 
 ---
 
-⭐ If you find this project interesting, feel free to explore the repository and share your feedback.
-
-**GreenPulse – Turning Renewable Energy Data into Meaningful Insights.**
+*GREENPULSE.AI — Smarter Monitoring. Better Forecasting. Sustainable Energy.*
